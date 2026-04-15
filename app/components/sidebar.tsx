@@ -181,15 +181,13 @@ export function SideBarBody(props: any) {
     <div className={styles["sidebar-body"]} onClick={onClick}>
       
       {/* ✅ 固定入口（不会消失） */}
-      <div style={{ padding: 10 }}>
-        <a href="/free-ai-chat" style={{ display: "block", marginBottom: 10 }}>
-          🚀 Free AI Chat
-        </a>
-
-        <a href="/tools" style={{ display: "block" }}>
-          🛠 Tools
-        </a>
-      </div>
+<div style={{ padding: 10 }}>
+  <a href="/free-ai-chat">🚀 Free AI Chat</a>
+  <a href="/chatgpt-free">🤖 ChatGPT Free</a>
+  <a href="/ai-chat-online">💬 AI Chat Online</a>
+  <a href="/chatgpt-alternative">🔥 Alternatives</a>
+  <a href="/tools">🛠 Tools</a>
+</div>
 
       {children}
     </div>
