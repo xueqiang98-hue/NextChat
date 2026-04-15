@@ -9,6 +9,9 @@ export default function Tools() {
 
       <h2>✍️ AI Writing</h2>
       <p><b>ChatGPT</b> - Best AI writing assistant</p>
+      <p style={{ color: "green" }}>
+🔥 Most popular AI tool in 2026
+</p>
       <p>👉 Helps you write articles, emails, and code faster</p>
       <a href="https://openai.com" target="_blank">
         👉 Try ChatGPT
@@ -18,6 +21,9 @@ export default function Tools() {
 
       <h2>🎨 AI Image</h2>
       <p><b>Midjourney</b> - Create stunning AI images</p>
+      <p style={{ color: "green" }}>
+🔥 Most popular AI tool in 2026
+</p>
       <p>👉 Turn text into high-quality images</p>
       <a href="https://midjourney.com" target="_blank">
         👉 Try Midjourney
@@ -27,6 +33,9 @@ export default function Tools() {
 
       <h2>🎬 AI Video</h2>
       <p><b>Runway</b> - AI video editing tool</p>
+      <p style={{ color: "green" }}>
+🔥 Most popular AI tool in 2026
+</p>
       <p>👉 Create videos with AI in minutes</p>
       <a href="https://runwayml.com" target="_blank">
         👉 Try Runway
@@ -36,6 +45,9 @@ export default function Tools() {
 
       <h2>💻 AI Coding</h2>
       <p><b>GitHub Copilot</b> - AI coding assistant</p>
+      <p style={{ color: "green" }}>
+🔥 Most popular AI tool in 2026
+</p>
       <p>👉 Write code faster with AI suggestions</p>
       <a href="https://github.com/features/copilot" target="_blank">
         👉 Try Copilot
