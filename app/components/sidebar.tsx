@@ -81,37 +81,28 @@ export function useDragSideBar() {
   };
 
   const onDragStart = (e: MouseEvent) => {
-    // Remembers the initial width each time the mouse is pressed
     startX.current = e.clientX;
     startDragWidth.current = config.sidebarWidth;
     const dragStartTime = Date.now();
 
     const handleDragMove = (e: MouseEvent) => {
-      if (Date.now() < lastUpdateTime.current + 20) {
-        return;
-      }
+      if (Date.now() < lastUpdateTime.current + 20) return;
       lastUpdateTime.current = Date.now();
       const d = e.clientX - startX.current;
       const nextWidth = limit(startDragWidth.current + d);
       config.update((config) => {
-        if (nextWidth < MIN_SIDEBAR_WIDTH) {
-          config.sidebarWidth = NARROW_SIDEBAR_WIDTH;
-        } else {
-          config.sidebarWidth = nextWidth;
-        }
+        config.sidebarWidth =
+          nextWidth < MIN_SIDEBAR_WIDTH
+            ? NARROW_SIDEBAR_WIDTH
+            : nextWidth;
       });
     };
 
     const handleDragEnd = () => {
-      // In useRef the data is non-responsive, so `config.sidebarWidth` can't get the dynamic sidebarWidth
       window.removeEventListener("pointermove", handleDragMove);
       window.removeEventListener("pointerup", handleDragEnd);
 
-      // if user click the drag icon, should toggle the sidebar
-      const shouldFireClick = Date.now() - dragStartTime < 300;
-      if (shouldFireClick) {
-        toggleSideBar();
-      }
+      if (Date.now() - dragStartTime < 300) toggleSideBar();
     };
 
     window.addEventListener("pointermove", handleDragMove);
@@ -130,63 +121,50 @@ export function useDragSideBar() {
     document.documentElement.style.setProperty("--sidebar-width", sideBarWidth);
   }, [config.sidebarWidth, isMobileScreen, shouldNarrow]);
 
-  return {
-    onDragStart,
-    shouldNarrow,
-  };
+  return { onDragStart, shouldNarrow };
 }
 
-export function SideBarContainer(props: {
-  children: React.ReactNode;
-  onDragStart: (e: MouseEvent) => void;
-  shouldNarrow: boolean;
-  className?: string;
-}) {
+export function SideBarContainer(props: any) {
   const isMobileScreen = useMobileScreen();
   const isIOSMobile = useMemo(
     () => isIOS() && isMobileScreen,
     [isMobileScreen],
   );
+
   const { children, className, onDragStart, shouldNarrow } = props;
-return (
-  <div className={styles["sidebar-body"]} onClick={onClick}>
-    
-    {/* 👉 按钮放顶部 */}
-    <div style={{ padding: 10 }}>
-      <a href="/free-ai-chat" style={{ display: "block", marginBottom: 10 }}>
-        🚀 Free AI Chat
-      </a>
 
-      <a href="/tools" style={{ display: "block" }}>
-        🛠 Tools
-      </a>
+  return (
+    <div
+      className={clsx(styles.sidebar, className, {
+        [styles["narrow-sidebar"]]: shouldNarrow,
+      })}
+      style={{
+        transition: isMobileScreen && isIOSMobile ? "none" : undefined,
+      }}
+    >
+      {children}
+      <div
+        className={styles["sidebar-drag"]}
+        onPointerDown={(e) => onDragStart(e as any)}
+      >
+        <DragIcon />
+      </div>
     </div>
-
-    {children}
-  </div>
-);
+  );
 }
 
-export function SideBarHeader(props: {
-  title?: string | React.ReactNode;
-  subTitle?: string | React.ReactNode;
-  logo?: React.ReactNode;
-  children?: React.ReactNode;
-  shouldNarrow?: boolean;
-}) {
+export function SideBarHeader(props: any) {
   const { title, subTitle, logo, children, shouldNarrow } = props;
+
   return (
     <Fragment>
       <div
         className={clsx(styles["sidebar-header"], {
           [styles["sidebar-header-narrow"]]: shouldNarrow,
         })}
-        data-tauri-drag-region
       >
         <div className={styles["sidebar-title-container"]}>
-          <div className={styles["sidebar-title"]} data-tauri-drag-region>
-            {title}
-          </div>
+          <div className={styles["sidebar-title"]}>{title}</div>
           <div className={styles["sidebar-sub-title"]}>{subTitle}</div>
         </div>
         <div className={clsx(styles["sidebar-logo"], "no-dark")}>{logo}</div>
@@ -196,58 +174,51 @@ export function SideBarHeader(props: {
   );
 }
 
-export function SideBarBody(props: {
-  children: React.ReactNode;
-  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-}) {
+export function SideBarBody(props: any) {
   const { onClick, children } = props;
+
   return (
     <div className={styles["sidebar-body"]} onClick={onClick}>
+      
+      {/* ✅ 固定入口（不会消失） */}
+      <div style={{ padding: 10 }}>
+        <a href="/free-ai-chat" style={{ display: "block", marginBottom: 10 }}>
+          🚀 Free AI Chat
+        </a>
+
+        <a href="/tools" style={{ display: "block" }}>
+          🛠 Tools
+        </a>
+      </div>
+
       {children}
     </div>
-    <div style={{ padding: 10 }}>
-  <a href="/free-ai-chat" style={{ display: "block", marginBottom: 10 }}>
-    🚀 Free AI Chat
-  </a>
-
-  <a href="/tools" style={{ display: "block" }}>
-    🛠 Tools
-  </a>
-</div>
   );
 }
 
-export function SideBarTail(props: {
-  primaryAction?: React.ReactNode;
-  secondaryAction?: React.ReactNode;
-}) {
-  const { primaryAction, secondaryAction } = props;
-
+export function SideBarTail(props: any) {
   return (
     <div className={styles["sidebar-tail"]}>
-      <div className={styles["sidebar-actions"]}>{primaryAction}</div>
-      <div className={styles["sidebar-actions"]}>{secondaryAction}</div>
+      <div className={styles["sidebar-actions"]}>
+        {props.primaryAction}
+      </div>
+      <div className={styles["sidebar-actions"]}>
+        {props.secondaryAction}
+      </div>
     </div>
   );
 }
 
-export function SideBar(props: { className?: string }) {
+export function SideBar(props: any) {
   useHotKey();
   const { onDragStart, shouldNarrow } = useDragSideBar();
-  const [showDiscoverySelector, setshowDiscoverySelector] = useState(false);
   const navigate = useNavigate();
   const config = useAppConfig();
   const chatStore = useChatStore();
   const [mcpEnabled, setMcpEnabled] = useState(false);
 
   useEffect(() => {
-    // 检查 MCP 是否启用
-    const checkMcpStatus = async () => {
-      const enabled = await isMcpEnabled();
-      setMcpEnabled(enabled);
-      console.log("[SideBar] MCP enabled:", enabled);
-    };
-    checkMcpStatus();
+    isMcpEnabled().then(setMcpEnabled);
   }, []);
 
   return (
@@ -261,59 +232,10 @@ export function SideBar(props: { className?: string }) {
         subTitle="Build your own AI assistant."
         logo={<ChatGptIcon />}
         shouldNarrow={shouldNarrow}
-      >
-        <div className={styles["sidebar-header-bar"]}>
-          <IconButton
-            icon={<MaskIcon />}
-            text={shouldNarrow ? undefined : Locale.Mask.Name}
-            className={styles["sidebar-bar-button"]}
-            onClick={() => {
-              if (config.dontShowMaskSplashScreen !== true) {
-                navigate(Path.NewChat, { state: { fromHome: true } });
-              } else {
-                navigate(Path.Masks, { state: { fromHome: true } });
-              }
-            }}
-            shadow
-          />
-          {mcpEnabled && (
-            <IconButton
-              icon={<McpIcon />}
-              text={shouldNarrow ? undefined : Locale.Mcp.Name}
-              className={styles["sidebar-bar-button"]}
-              onClick={() => {
-                navigate(Path.McpMarket, { state: { fromHome: true } });
-              }}
-              shadow
-            />
-          )}
-          <IconButton
-            icon={<DiscoveryIcon />}
-            text={shouldNarrow ? undefined : Locale.Discovery.Name}
-            className={styles["sidebar-bar-button"]}
-            onClick={() => setshowDiscoverySelector(true)}
-            shadow
-          />
-        </div>
-        {showDiscoverySelector && (
-          <Selector
-            items={[
-              ...DISCOVERY.map((item) => {
-                return {
-                  title: item.name,
-                  value: item.path,
-                };
-              }),
-            ]}
-            onClose={() => setshowDiscoverySelector(false)}
-            onSelection={(s) => {
-              navigate(s[0], { state: { fromHome: true } });
-            }}
-          />
-        )}
-      </SideBarHeader>
+      />
+
       <SideBarBody
-        onClick={(e) => {
+        onClick={(e: any) => {
           if (e.target === e.currentTarget) {
             navigate(Path.Home);
           }
@@ -321,50 +243,19 @@ export function SideBar(props: { className?: string }) {
       >
         <ChatList narrow={shouldNarrow} />
       </SideBarBody>
+
       <SideBarTail
         primaryAction={
-          <>
-            <div className={clsx(styles["sidebar-action"], styles.mobile)}>
-              <IconButton
-                icon={<DeleteIcon />}
-                onClick={async () => {
-                  if (await showConfirm(Locale.Home.DeleteChat)) {
-                    chatStore.deleteSession(chatStore.currentSessionIndex);
-                  }
-                }}
-              />
-            </div>
-            <div className={styles["sidebar-action"]}>
-              <Link to={Path.Settings}>
-                <IconButton
-                  aria={Locale.Settings.Title}
-                  icon={<SettingsIcon />}
-                  shadow
-                />
-              </Link>
-            </div>
-            <div className={styles["sidebar-action"]}>
-              <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-                <IconButton
-                  aria={Locale.Export.MessageFromChatGPT}
-                  icon={<GithubIcon />}
-                  shadow
-                />
-              </a>
-            </div>
-          </>
+          <Link to={Path.Settings}>
+            <IconButton icon={<SettingsIcon />} shadow />
+          </Link>
         }
         secondaryAction={
           <IconButton
             icon={<AddIcon />}
-            text={shouldNarrow ? undefined : Locale.Home.NewChat}
             onClick={() => {
-              if (config.dontShowMaskSplashScreen) {
-                chatStore.newSession();
-                navigate(Path.Chat);
-              } else {
-                navigate(Path.NewChat);
-              }
+              chatStore.newSession();
+              navigate(Path.Chat);
             }}
             shadow
           />
