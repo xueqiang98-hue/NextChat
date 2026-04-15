@@ -207,6 +207,15 @@ export function SideBarBody(props: {
     <div className={styles["sidebar-body"]} onClick={onClick}>
       {children}
     </div>
+    <div style={{ padding: 10 }}>
+  <a href="/free-ai-chat" style={{ display: "block", marginBottom: 10 }}>
+    🚀 Free AI Chat
+  </a>
+
+  <a href="/tools" style={{ display: "block" }}>
+    🛠 Tools
+  </a>
+</div>
   );
 }
 
