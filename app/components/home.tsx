@@ -214,16 +214,21 @@ function Screen() {
     );
   };
 
-  return (
-    <div
-      className={clsx(styles.container, {
-        [styles["tight-container"]]: shouldTightBorder,
-        [styles["rtl-screen"]]: getLang() === "ar",
-      })}
-    >
-      {renderContent()}
+ return (
+  <div
+    className={clsx(styles.container, {
+      [styles["tight-container"]]: shouldTightBorder,
+      [styles["rtl-screen"]]: getLang() === "ar",
+    })}
+  >
+    {/* 👉 在这里加 */}
+    <div style={{ padding: 10 }}>
+      <a href="/tools">🛠 Tools</a>
     </div>
-  );
+
+    {renderContent()}
+  </div>
+);
 }
 
 export function useLoadData() {
