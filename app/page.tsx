@@ -1,3 +1,6 @@
+<p style={{color: "red"}}>
+Free users: 10 messages per day. Upgrade for unlimited access.
+</p>
 import { Analytics } from "@vercel/analytics/react";
 import { Home } from "./components/home";
 import { getServerSideConfig } from "./config/server";
