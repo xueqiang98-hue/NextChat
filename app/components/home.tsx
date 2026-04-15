@@ -221,7 +221,7 @@ function Screen() {
       [styles["rtl-screen"]]: getLang() === "ar",
     })}
   >
-    {/* 👉 在这里加 */}
+    {/* 👉 在这里加tools至页面 */}
     <div style={{ padding: 10 }}>
       <a href="/tools">🛠 Tools</a>
     </div>
