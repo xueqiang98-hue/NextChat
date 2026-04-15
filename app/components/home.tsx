@@ -35,10 +35,6 @@ export function Loading(props: { noLogo?: boolean }) {
   return (
     <>
 <div style={{ padding: 10 }}>
-  <a href="/free-ai-chat" style={{ marginRight: 15 }}>
-    🚀 Free AI Chat
-  </a>
-
   <a href="/tools">
     🛠 Tools
   </a>
