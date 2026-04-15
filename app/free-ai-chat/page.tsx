@@ -1,28 +1,68 @@
 export default function Page() {
   return (
-    <div style={{ padding: 20, maxWidth: 800, margin: "0 auto" }}>
+    <main style={{ padding: "40px", maxWidth: "800px", margin: "0 auto" }}>
+      
       <h1>Free AI Chat Online (No Login Required)</h1>
 
       <p>
-        Looking for a free AI chat tool? You are in the right place.
+        Welcome to the best free AI chat platform. You can chat with AI online
+        instantly without login or signup.
       </p>
+
+      <h2>🚀 Start Chatting Now</h2>
 
       <p>
-        Our AI chat helps you write, learn, code, and solve problems instantly.
+        Click below to start chatting with AI:
       </p>
 
-      <h2>🚀 Why use our AI chat?</h2>
-      <ul>
-        <li>✔ Free to use</li>
-        <li>✔ No login required</li>
-        <li>✔ Fast and smart responses</li>
-      </ul>
-
-      <h2>👉 Start chatting now</h2>
-
-      <a href="/" style={{ fontSize: 20 }}>
+      <a
+        href="/"
+        style={{
+          display: "inline-block",
+          padding: "12px 20px",
+          background: "#0070f3",
+          color: "#fff",
+          borderRadius: "8px",
+          textDecoration: "none",
+          marginTop: "10px",
+        }}
+      >
         👉 Go to AI Chat
       </a>
-    </div>
+
+      <h2 style={{ marginTop: "40px" }}>
+        Why Choose Our Free AI Chat?
+      </h2>
+
+      <ul>
+        <li>✅ No login required</li>
+        <li>✅ Fast and smart responses</li>
+        <li>✅ Works on mobile and desktop</li>
+      </ul>
+
+      <h2 style={{ marginTop: "40px" }}>
+        🛠 Explore More AI Tools
+      </h2>
+
+      <p>
+        Discover powerful AI tools to boost productivity:
+      </p>
+
+      <a
+        href="/tools"
+        style={{
+          display: "inline-block",
+          padding: "12px 20px",
+          background: "#111",
+          color: "#fff",
+          borderRadius: "8px",
+          textDecoration: "none",
+          marginTop: "10px",
+        }}
+      >
+        👉 View AI Tools
+      </a>
+
+    </main>
   );
 }
