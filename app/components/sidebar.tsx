@@ -148,25 +148,23 @@ export function SideBarContainer(props: {
     [isMobileScreen],
   );
   const { children, className, onDragStart, shouldNarrow } = props;
-  return (
-    <div
-      className={clsx(styles.sidebar, className, {
-        [styles["narrow-sidebar"]]: shouldNarrow,
-      })}
-      style={{
-        // #3016 disable transition on ios mobile screen
-        transition: isMobileScreen && isIOSMobile ? "none" : undefined,
-      }}
-    >
-      {children}
-      <div
-        className={styles["sidebar-drag"]}
-        onPointerDown={(e) => onDragStart(e as any)}
-      >
-        <DragIcon />
-      </div>
+return (
+  <div className={styles["sidebar-body"]} onClick={onClick}>
+    
+    {/* 👉 按钮放顶部 */}
+    <div style={{ padding: 10 }}>
+      <a href="/free-ai-chat" style={{ display: "block", marginBottom: 10 }}>
+        🚀 Free AI Chat
+      </a>
+
+      <a href="/tools" style={{ display: "block" }}>
+        🛠 Tools
+      </a>
     </div>
-  );
+
+    {children}
+  </div>
+);
 }
 
 export function SideBarHeader(props: {
