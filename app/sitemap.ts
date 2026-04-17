@@ -1,24 +1,19 @@
 export default function sitemap() {
+  const baseUrl = "https://www.shgjip.com";
+
+  const dynamicPages = [
+    "free-ai-chat-no-login",
+    "best-ai-tools-2026",
+  ];
+
   return [
     {
-      url: "https://www.shgjip.com",
+      url: baseUrl,
       lastModified: new Date(),
     },
-    {
-      url: "https://www.shgjip.com/free-ai-chat",
+    ...dynamicPages.map((slug) => ({
+      url: `${baseUrl}/${slug}`,
       lastModified: new Date(),
-    },
-    {
-      url: "https://www.shgjip.com/chatgpt-free",
-      lastModified: new Date(),
-    },
-    {
-      url: "https://www.shgjip.com/ai-chat-online",
-      lastModified: new Date(),
-    },
-    {
-      url: "https://www.shgjip.com/chatgpt-alternative",
-      lastModified: new Date(),
-    },
+    })),
   ];
 }
