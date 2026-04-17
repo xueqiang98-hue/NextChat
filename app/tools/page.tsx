@@ -1,155 +1,75 @@
-export default function Tools() {
+export default function ToolsPage() {
   return (
-    <main
-      style={{
-        padding: 40,
-        maxWidth: 900,
-        margin: "0 auto",
-        fontFamily: "sans-serif",
-      }}
-    >
-      <h1>🔥 Best AI Tools to Make Money (2026)</h1>
+    <main style={{ padding: 40, maxWidth: 900, margin: "auto" }}>
+      <h1>🔥 Best AI Tools (Free & Paid)</h1>
 
-      <p>
-        Explore the best AI tools for chatting, writing, designing, and making
-        money online.
-      </p>
+      <p>We tested the best AI tools for chat, writing, and images.</p>
 
-      <hr style={{ margin: "30px 0" }} />
+      {/* 工具1 */}
+      <div style={{ marginTop: 30 }}>
+        <h2>🤖 AI Chat</h2>
+        <p>Fast and smart AI chat for daily use.</p>
 
-      {/* Chat工具 */}
-      <h2>🤖 AI Chat Tools</h2>
+        <a
+          href="你的联盟链接"
+          target="_blank"
+          style={{
+            display: "inline-block",
+            marginTop: 10,
+            padding: "10px 20px",
+            background: "black",
+            color: "white",
+            borderRadius: 8,
+            textDecoration: "none",
+          }}
+        >
+          👉 Try Now
+        </a>
+      </div>
 
-      <p>
-        Use AI chat tools for conversation, coding, research, and daily tasks.
-      </p>
+      {/* 工具2 */}
+      <div style={{ marginTop: 40 }}>
+        <h2>✍️ AI Writing Tool</h2>
+        <p>Create articles, blogs, and content instantly.</p>
 
-      <a
-        href="https://chat.openai.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={btnStyle("#000")}
-      >
-        👉 Try ChatGPT (Free)
-      </a>
+        <a
+          href="你的联盟链接"
+          target="_blank"
+          style={{
+            display: "inline-block",
+            marginTop: 10,
+            padding: "10px 20px",
+            background: "green",
+            color: "white",
+            borderRadius: 8,
+            textDecoration: "none",
+          }}
+        >
+          👉 Start Writing
+        </a>
+      </div>
 
-      <hr style={{ margin: "40px 0" }} />
+      {/* 工具3 */}
+      <div style={{ marginTop: 40 }}>
+        <h2>🎨 AI Image Generator</h2>
+        <p>Generate stunning images with AI.</p>
 
-      {/* 写作工具 */}
-      <h2>✍️ AI Writing Tools</h2>
-
-      <p>
-        Generate blog posts, ads, emails, and SEO content automatically.
-      </p>
-
-      <a
-        href="https://www.jasper.ai"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={btnStyle("#444")}
-      >
-        👉 Try AI Writing Tool
-      </a>
-
-      <hr style={{ margin: "40px 0" }} />
-
-      {/* 绘图工具 */}
-      <h2>🎨 AI Image Generator</h2>
-
-      <p>
-        Create stunning AI images, logos, and artwork in seconds.
-      </p>
-
-      <a
-        href="https://www.midjourney.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={btnStyle("#6a0dad")}
-      >
-        👉 Generate AI Images
-      </a>
-
-      <hr style={{ margin: "40px 0" }} />
-
-      {/* 联盟平台 */}
-      <h2>💰 Make Money with AI (Affiliate Programs)</h2>
-
-      <p>
-        Join affiliate platforms and earn commissions by promoting AI tools.
-      </p>
-
-      <a
-        href="https://partnerstack.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={btnStyle("green")}
-      >
-        👉 Join PartnerStack
-      </a>
-
-      <br /><br />
-
-      <a
-        href="https://impact.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={btnStyle("blue")}
-      >
-        👉 Join Impact
-      </a>
-
-      <br /><br />
-
-      <a
-        href="https://firstpromoter.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={btnStyle("orange")}
-      >
-        👉 Join FirstPromoter
-      </a>
-
-      <hr style={{ margin: "40px 0" }} />
-
-      {/* CTA */}
-      <h2>🚀 Start Using AI Today</h2>
-
-      <p>
-        Millions of people are already using AI tools to save time and make
-        money online.
-      </p>
-
-      <a
-        href="https://chat.openai.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          display: "inline-block",
-          padding: "16px 28px",
-          background: "red",
-          color: "white",
-          borderRadius: "12px",
-          textDecoration: "none",
-          fontWeight: "bold",
-          fontSize: "18px",
-        }}
-      >
-        🔥 Try AI Now — Free
-      </a>
+        <a
+          href="你的联盟链接"
+          target="_blank"
+          style={{
+            display: "inline-block",
+            marginTop: 10,
+            padding: "10px 20px",
+            background: "purple",
+            color: "white",
+            borderRadius: 8,
+            textDecoration: "none",
+          }}
+        >
+          👉 Generate Images
+        </a>
+      </div>
     </main>
   );
-}
-
-/* 按钮样式函数 */
-function btnStyle(bg: string) {
-  return {
-    display: "inline-block",
-    padding: "12px 22px",
-    background: bg,
-    color: "#fff",
-    borderRadius: "8px",
-    textDecoration: "none",
-    marginTop: 10,
-    fontWeight: "bold",
-  };
 }
